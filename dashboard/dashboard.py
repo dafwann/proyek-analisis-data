@@ -85,7 +85,8 @@ with tab1:
         ax[0].text(b.get_width(), b.get_y() + b.get_height() / 2, f"  {money(b.get_width())} ({s:.1f}%)", va="center", fontsize=10)
     ax[0].set_title(f"{n} Kategori Revenue Tertinggi", fontsize=14)
     ax[0].set_xlim(0, top["revenue"].max() * 1.35)
-    bars = ax[1].barh(bot["category"], bot["revenue"], color=[MUTED] * (n - 1) + [ALERT])
+    ax[0].xaxis.set_major_formatter(mtick.FuncFormatter(money))
+    bars = ax[1].barh(bot["category"], bot["revenue"], color=[ALERT] + [MUTED] * (n - 1))
     for b, s in zip(bars, bot["share"]):
         ax[1].text(b.get_width(), b.get_y() + b.get_height() / 2, f"  R$ {b.get_width():,.0f} ({s:.2f}%)", va="center", fontsize=10)
     ax[1].set_title(f"{n} Kategori Revenue Terendah", fontsize=14)
